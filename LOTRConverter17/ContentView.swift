@@ -101,6 +101,10 @@ struct ContentView: View {
                         
                     }
                     .padding(.trailing)
+                    .sheet(isPresented: $showExchangeInfo){
+                        ExchangeInfo()
+                    }
+                    
                 }
 
             }
