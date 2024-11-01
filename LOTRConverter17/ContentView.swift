@@ -9,11 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @State var showExchangeInfo  = false
-    @State var letAmount = ""
-    @State var rightAmount = ""
-    @State var topCurrency = Currency.silverPiece
-    @State var bottomCurrency = Currency.goldPiece
     @State var showSelectCurrency = false
+    
+    @State var leftAmount = ""
+    @State var rightAmount = ""
+    
+    @State var leftCurrency = Currency.silverPiece
+    @State var rightCurrency = Currency.goldPiece
+
     var body: some View {
         ZStack{
             //background image
@@ -40,13 +43,13 @@ struct ContentView: View {
                         //currency
                         HStack{
                             //image
-                            Image(topCurrency.image)
+                            Image(leftCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height:33)
                             
                             //text
-                            Text(topCurrency.name)
+                            Text(leftCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
                         }
@@ -56,7 +59,7 @@ struct ContentView: View {
                            
                         }
                         //text field
-                        TextField("Amount", text: $rightAmount)
+                        TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                  
                     }
@@ -70,12 +73,12 @@ struct ContentView: View {
                         //currency
                         HStack{
                             //text
-                            Text(bottomCurrency.name)
+                            Text(rightCurrency.name)
                                 .font(.headline)
                                 .foregroundStyle(.white)
     
                             //image
-                            Image(bottomCurrency.image)
+                            Image(rightCurrency.image)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 33)
@@ -115,7 +118,7 @@ struct ContentView: View {
                         ExchangeInfo()
                     }
                     .sheet(isPresented: $showSelectCurrency){
-                        SelectCurrency(leftCurrency: topCurrency,rightCurrency: bottomCurrency)
+                        SelectCurrency(topCurrency: $leftCurrency,bottomCurrency: $rightCurrency)
                     }
                     
                     
