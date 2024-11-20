@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     @State var showExchangeInfo  = false
@@ -61,6 +62,9 @@ struct ContentView: View {
                             showSelectCurrency.toggle()
                            
                         }
+                        .popoverTip(CurrencyTip(),arrowEdge:.bottom)
+                        
+                        
                         //text field
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
@@ -125,6 +129,9 @@ struct ContentView: View {
                         
                     }
                     .padding(.trailing)
+                    .task{
+                        try? Tips.configure()
+                    }
                     .onChange(of: rightAmount){
                         
                         if rightTyping{
